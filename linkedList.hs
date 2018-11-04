@@ -9,7 +9,7 @@ toList :: LinkedList a -> [a]
 toList Null = []
 toList (Node a linkedlist) = a : toList (linkedlist)
 
---toList :: [a] -> LinkedList a
+toLinkedList :: [a] -> LinkedList a
 toLinkedList [] = Null
 toLinkedList (x:xs) = add x (toLinkedList xs)
 
