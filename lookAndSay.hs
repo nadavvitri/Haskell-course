@@ -1,7 +1,7 @@
 -- 1)
 import Data.List
 
---lookAndSay ::(Num a) => a -> a
---lookAndSay 1 = "1"
---lookAndSay n = f (group (lookAndSay (n-1)))
---  where f xs = map (\xs -> show (length xs) ++ head(xs)) xs
+lookAndSay ::(Eq a, Num a, Ord a) => a -> [Char]
+lookAndSay 1 = "1"
+lookAndSay n = if (n <= 0) then "Error" else g (map (\xs -> show (length xs) ++ [head(xs)]) (group (lookAndSay (n-1))))
+     where g xs = foldl (\acc x -> acc ++ x) "" xs
