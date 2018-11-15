@@ -33,7 +33,3 @@ differentiate (Pow left right) = Mul right (Pow left (Sub right (Const (Just 1.0
 differentiate (Cos left) = Mul (Sub (Const (Just 0.0)) (Sin left)) (differentiate left)
 differentiate (Sin left) = Mul (Cos left) (differentiate left)
 
-
-
-
-
