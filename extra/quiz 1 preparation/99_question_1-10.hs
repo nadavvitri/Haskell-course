@@ -26,3 +26,43 @@ myLength [] = 0
 myLength (x:xs) = 1 + (myLength xs)
 
 myLength' xs = foldl (\acc x -> acc + 1) 1 xs
+
+--5)
+myReverse :: [a] -> [a]
+myReverse [] = []
+myReverse (x:xs) = myReverse (xs) ++ [x]
+
+myReverse' xs = foldl (\acc x -> x:acc) [] xs
+
+--6)
+isPal :: (Eq a) => [a] -> Bool
+isPal [] = True
+isPal [a] = True
+isPal xs
+    | (head (xs) == last (xs)) = isPal (tail (init xs))
+    | otherwise = False
+
+--7)
+data NestedList a = Elem a | List [NestedList a] deriving (Show)
+
+flatten :: NestedList a -> [a]
+flatten (Elem a) = [a]
+flatten (List xs) = f (map (flatten) xs)
+       where f ys = foldl (\acc x -> acc ++ x) [] ys
+
+--8)
+cmprs :: (Eq a) => [a] -> [a]
+cmprs [] = []
+cmprs (y:xs) = foldl (\acc x -> if ((last acc) /= x) then (acc ++ [x]) else acc) [y] xs
+
+--9)
+pack :: (Eq a) => [a] -> [[a]]
+pack [] = []
+pack (x:xs) = (x: takeWhile (==x) xs) : (pack (dropWhile (==x) xs))
+
+--10)
+encode :: (Eq a) => [a] -> [(Int, a)]
+encode [] = []
+encode (x:xs) = ( (1 + length (takeWhile (==x) xs)), x) : encode (dropWhile (==x) xs)
+
+encode' xs = map (\x -> (length x, head x)) (pack xs)
